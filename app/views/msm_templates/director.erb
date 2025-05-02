@@ -1,0 +1,44 @@
+<h1>Director #<%= @id %> details</h1>
+
+<a href="/actors">Go back</a>
+
+<hr>
+
+<p>Name</p>
+<p><%= @name%></p>
+<p>Dob</p>
+<p><%= @dob%></p>
+<p>Bio</p>
+<p><%= @bio%></p>
+<p>Image</p>
+<img src="<%= @image%>" width=200>
+<p>Creataed at</p>
+<p><%= @created%></p>
+<p>Updated at</p>
+<p><%= @updated%></p>
+
+<hr>
+
+<h2>Filmography</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </tr>
+  <% @list_of_movies.each do |the_item| %>
+    <tr>
+      <td><%= the_item.id %></td>
+      <td><img src="<%= the_item.image %>" width=200></td>
+      <td><%= the_item.title %></td>
+      <td><%= the_item.year %></td>
+      <td><%= Director.where({ :id => the_item.director_id}).at(0).name
+       %></td>
+      <td><a href="/movies/<%= the_item.id %>">Show details<a></td>
+    <tr>
+  <% end %>
+</table>

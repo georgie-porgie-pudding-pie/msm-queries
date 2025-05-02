@@ -1,7 +1,9 @@
 <h1>Actor #<%= @id %> details</h1>
-<hr>
 
 <a href="/actors">Go back</a>
+
+<hr>
+
 <p>Name</p>
 <p><%= @name%></p>
 <p>Dob</p>
@@ -18,3 +20,23 @@
 <hr>
 
 <h2>Filmography</h2>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th>Character name</th>
+    <th></th>
+  </tr>
+  <% @list_of_characters.each do |the_item| %>
+    <tr>
+      <td><%= Movie.where({ :id => the_item.movie_id}).at(0).title %></td>
+      <td><%= Movie.where({ :id => the_item.movie_id}).at(0).year %></td>
+      <td><%= Director.where({ :id => Movie.where({ :id => the_item.movie_id}).at(0).director_id}).at(0).name
+       %></td>
+      <td><%= the_item.name %></td>
+      <td><a href="/movies/<%= the_item.movie_id %>">Show details<a></td>
+    <tr>
+  <% end %>
+</table>
